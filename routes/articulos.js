@@ -1,6 +1,6 @@
 import  Router from "express"
-import categoria from "../controllers/categoria.js";
-import { existeCategoriaById, existeCategoriaByNombre } from "../db-helpers/categoria.js"
+import articulos from "../controllers/articulos.js";
+import { existeArticulosById, existeArticulosByNombre } from "../db-helpers/articulos.js"
 import { validarCampos } from "../middlewares/validar-campos.js";
 import { validarJWT } from "../middlewares/validar-jwt.js";
 import validator from 'express-validator';
@@ -11,49 +11,49 @@ const router = Router();
 router.get("/",[
     validarJWT,
     validarCampos
-],categoria.categoriaGet);
+],articulos.articulosGet);
 
 router.get("/:id",[
     validarJWT,
     check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom(existeCategoriaById),
+    check('id').custom(existeArticulosById),
     validarCampos
-],categoria.categoriaById);
+],articulos.articulosById);
 
 router.post("/",[
     validarJWT,
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
-    check('nombre').custom(existeCategoriaByNombre),
+    check('nombre').custom(existeArticulosByNombre),
     validarCampos
-],categoria.categoriaPost);
+],articulos.articulosPost);
 
 router.put("/:id",[
     validarJWT,
     check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom(existeCategoriaById),
-    check('nombre').custom(existeCategoriaByNombre),
+    check('id').custom(existeArticulosById),
+    check('nombre').custom(existeArticulosByNombre),
     validarCampos
-],categoria.categoriaPut);
+],articulos.articulosPut);
 
 router.put("/activar/:id",[
     validarJWT,
     check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom(existeCategoriaById),
+    check('id').custom(existeArticulosById),
     validarCampos
-],categoria.categoriaActivar);
+],articulos.articulosActivar);
 
 router.put("/desactivar/:id",[
     validarJWT,
     check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom(existeCategoriaById),
+    check('id').custom(existeArticulosById),
     validarCampos
-],categoria.categoriaDesactivar);
+],articulos.articulosDesactivar);
 
 router.delete("/:id",[
     validarJWT,
     check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom(existeCategoriaById),
+    check('id').custom(existeArticulosById),
     validarCampos
-],categoria.categoriaDelete);
+],articulos.articulosDelete);
 
 export default router

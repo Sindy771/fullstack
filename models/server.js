@@ -1,7 +1,11 @@
 import express from "express";
 import cors from "cors";
 import dbConection from "../database/config.js";
-import categoria from '../routes/categoria.js'
+import categoria from '../routes/categoria.js';
+import usuario from '../routes/usuario.js'; 
+import persona from '../routes/persona.js'; 
+import articulos from '../routes/articulos.js'
+import ventas from '../routes/ventas.js'
 
 class Server {
   constructor() {
@@ -18,6 +22,11 @@ class Server {
 
   routes() {
     this.app.use('/api/categoria', categoria )
+    this.app.use('/api/usuario', usuario )
+    this.app.use('/api/persona', persona)
+    this.app.use('/api/articulos', articulos)
+    this.app.use('/api/ventas', ventas)
+    
   }
 
   async dbConexion() {
@@ -38,3 +47,6 @@ class Server {
 }
 
 export { Server };
+
+
+//Mayra Marcela González Rojas
